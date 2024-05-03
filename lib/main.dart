@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:monitor_health/components/video_player.dart';
+import 'package:monitor_health/dob.dart';
+import 'package:monitor_health/video_player.dart';
 import 'package:monitor_health/payment.dart';
 import 'package:monitor_health/vitals.dart';
 import 'package:monitor_health/pdfviewer.dart';
@@ -91,7 +92,7 @@ class _MonitorHealthState extends State<MonitorHealth> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => VideoPlayerScreen()),
+                          builder: (context) => const VideoPlayerScreen()),
                     );
                   },
                   child: const Text('Video'),
@@ -105,6 +106,16 @@ class _MonitorHealthState extends State<MonitorHealth> {
                     );
                   },
                   child: const Text('Payment'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DOBScreen()),
+                    );
+                  },
+                  child: const Text('DOB'),
                 ),
               ],
             ),

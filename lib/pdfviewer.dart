@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,17 +25,24 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         _pdfPath = path;
         _isLoading = false;
       });
+    }).catchError((error) {
+      print('Error loading PDF: $error');
     });
   }
 
   Future<String> _loadPDF() async {
-    final ByteData data = await rootBundle.load('assets/sample.pdf');
-    final Uint8List bytes = data.buffer.asUint8List();
-    final tempDir = await getTemporaryDirectory();
-    final tempPath = '${tempDir.path}/sample.pdf';
-    final file = File(tempPath);
-    await file.writeAsBytes(bytes);
-    return tempPath;
+    try {
+      final ByteData data = await rootBundle.load('assets/sample.pdf');
+      final Uint8List bytes = data.buffer.asUint8List();
+      final tempDir = await getTemporaryDirectory();
+      final tempPath = '${tempDir.path}/sample.pdf';
+      final file = File(tempPath);
+      await file.writeAsBytes(bytes);
+      return tempPath;
+    } catch (e) {
+      print('Error loading PDF: $e');
+      return ''; // Return empty string or handle error accordingly
+    }
   }
 
   @override
@@ -48,6 +56,10 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
             ? const CircularProgressIndicator()
             : PDFView(
                 filePath: _pdfPath,
+                onPageChanged: (int? page, int? total) {
+                  print('page change: $page/$total');
+                },
+                onViewCreated: (PDFViewController controller) {},
               ),
       ),
     );

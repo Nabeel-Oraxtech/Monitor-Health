@@ -209,13 +209,13 @@ packages:
     source: hosted
     version: "3.2.0"
   in_app_purchase_android:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: in_app_purchase_android
-      sha256: "4d71972a62d54fd464b1c846e549aed8685cb65b50fc9dffa1fd50e55d8bc2ac"
+      sha256: "25b4bc74d4d990c18a889ea9486cb9029285955f38ca81ff335c8936edf9e66d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.4+1"
+    version: "0.3.5"
   in_app_purchase_platform_interface:
     dependency: transitive
     description:
